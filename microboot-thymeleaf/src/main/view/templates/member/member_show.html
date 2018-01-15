@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBootMemberShow</title>
+</head>
+<body>
+	<p th:text="'用户编号：' + ${member.mid}"/>
+	<p th:text="'用户姓名：' + ${member.name}"/>
+	<p th:text="'用户年龄：' + ${member.age}"/>
+	<p th:text="'用户工资：' + ${member.salary}"/>
+	<p th:text="'用户生日：' + ${member.birthday}"/>
+	<p th:text="'用户生日：' + ${#dates.format(member.birthday,'yyyy-MM-dd')}"/>
+	<hr/>
+	<div th:object="${member}">
+		<p th:text="'用户编号：' + *{mid}"/>
+		<p th:text="'用户姓名：' + *{name}"/>
+		<p th:text="'用户年龄：' + *{age}"/>
+		<p th:text="'用户工资：' + *{salary}"/>
+		<p th:text="'用户生日：' + *{birthday}"/>
+		<p th:text="'用户生日：' + *{#dates.format(birthday,'yyyy-MM-dd')}"/>
+	</div>
+	<hr/>
+	<span th:if="${member.age lt 18}">未成年人！</span><br/>
+	
+	<span th:if="${member.name eq '张蛋'}">欢迎张蛋来访！</span><br/>
+	
+	<span th:unless="${member.age gt 18}">未满18岁不能喝酒！</span><br/>
+	
+	<span th:switch="${member.mid}">
+		<p th:case="100">编号为100的员工！ </p>
+		<p th:case="101">编号为101的员工！ </p>
+		<p th:case="*">没有匹配成功的数据！ </p>
+	</span>
+</body>
+</html>

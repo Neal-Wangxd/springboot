@@ -1,0 +1,31 @@
+在springboot 里针对错误的处理一共提供有种方式：数据验证错误、错误页指派、全局异常处理
+
+
+
+数据验证：(不建议使用springboot自带的)
+若要进行错误提示，先建立一个错误信息配置文件，该文件在src/main/resource 名称为ValidationMessages.properties
+
+
+错误页处理
+
+想要进行错误页处理，最好根据每一个错误代码创建一个属于自己的错误显示页
+所有的错误页都是普通的静态文件，建议放在/src/main/view/static目录下
+然后添加一个错误页的配置类（ErrorPageConfig）
+
+
+全局异常
+
+首先需要定义一个全局异常处理类（GlobalExceptionHandler）
+然后定义一个错误页  error_show.html
+对于全局异常信息显示出了采用跳转处理也可以使用rest进行显示
+跳转的时候使用标签 @ControllerAdvice   //当做控制层的切面处理
+rest显示的时候 @RestControllerAdvice
+
+
+
+
+
+
+
+
+

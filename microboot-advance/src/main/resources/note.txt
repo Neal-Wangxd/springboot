@@ -1,0 +1,80 @@
+改变环境属性
+
+默认情况下，在SpringBoot里面启动WEB容器为Tomcat：
+从实际开发来讲，我们的WEB部署项目如果是单独运行不可能在8080端口上，从正常来讲我们的服务器应该运行在80端口上，
+所以如果要想修改这样的默认环境，则必须编写与对应的配置文件，该配置文件一定要写在classpath之中，
+在项目中直接创建一个application.properties文件（文件名不能修改）
+定义application.properties 配置文件
+server.port=80 //设置Tomcat的运行服务所在端口
+server.context-path=/springboot   //设置ContextPath的访问路径，但实际开发中是不能进行配置的
+严格来讲在SpringBoot、SpringCloud里面可以使用两类配置文件：application.properties、application.yml
+定义application.yml配置文件
+server:
+	port: 80 //设置Tomcat的运行服务所在端口
+如果application.properties和application.yml两个文件同时存在，先进行application.properties配置文件的加载，
+如果两个 文件的配置项有冲突，则以properties为主。
+在之前默认使用WEB容器是Tomcat容器，实际上在SpringBoot里面如果用户有需要可以将容器更换为jetty容器。
+
+
+
+读取资源文件
+
+如果在springboot里面进行资源文件的配置只需要简单的配置application.yml文件即可,而且所有注入的资源文件都可像最初的spring
+处理那样直接使用MessageSource进行读取。
+修改application.yml文件
+spring:  //表示该配置直接为spring容器负责处理
+	messages: 		//表示进行资源配置
+		basename: i18n/Messages,i18n/Pages 	//资源文件名称
+当执行完以上配置后会自动为用户创建MessageSource对象，那么用户在使用的时候直接注入此对象即可
+
+
+
+Bean配置
+
+需要配置程序的Bean所在的包必须是程序启动类所在包的子包中，这样才可以自动扫描到。
+SSM或SSH 框架想要迁移到SpringBoot中，只需在SpringBoot程序启动类上使用xml进行配置加载
+@ImportResource(locations={"classpath:spring-common.xml"});
+在开发中要准确的注入指定的对象，需要使用名称完成
+@Resource(name="messageService")//这样才可以准确的找到需要注入的实体对象
+
+
+
+模板渲染
+
+之前的信息显示都是以Rest风格进行显示，但是在实际开发中数据都是由页面完成渲染，但这个页面不是*.jsp，是*.html。
+而且使用的渲染的页面采用的是模板方式显示，这里使用thymeleaf模板渲染
+控制器使用@Controller注解，所以此时执行该控制器的方法后会跳转处理。
+若要进行跳转页面的定义，必须在classpath路径下建立一个templates目录，在这个目录里保存有thymeleaf的所有相关页面。
+这些页面可以按照文件目录保存：src/main/view/templates/message/message_show.html
+如果在我们所定义的页面不是通过控制器跳转，需要在“src/main/view” 建立一个static子目录，该目录存放所有静态页面
+http://localhost/springboot/message_index.html
+在以后的开发中，将js,css,images等信息文件都要放在static目录下。
+thymeleaf 默认的访问页面路径的后缀为*.html，可以通过修改application.yml文件进行变更
+spring:  #表示该配置直接为spring容器负责处理
+	thymeleaf:
+		suffix: .htm
+这时候需要改message_show.html文件的后缀为.htm才可以正常访问
+
+
+
+profile 配置
+
+在实际开发中有多个环境。需要选择不同的配置文件，但对于多profile配置一定要区分是yml还是properties
+在使用yml配置文件的时候所有使用的profile配置项都要求写在一个文件中。
+Maven 打包：clean package
+如果使用默认的profile就正常执行：java -jar microboot.jar
+如果需要切换profile 就执行：java -jar microboot.jar --spring.profiles.active=pro
+在进行profile配置的时候，如果使用的是application.properties 配置，则需要创建多个文件
+如:application-dev.properties/ application-beat.properties/ application-pro.properties
+最后还是需要一个公共的application.properties 配置文件设置使用的profile配置
+spring.profiles.active=pro
+
+设置ico图标
+
+先生成ico文件，将文件放置src/main/view/static/images目录中，
+在页面加入<link rel="icon" type="image/x-icon" href="/images/myico_16.ico"/>
+
+
+
+	
+	

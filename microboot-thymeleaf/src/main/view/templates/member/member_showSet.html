@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBootMemberShowSet</title>
+</head>
+<body>
+	<p th:text="${#sets.contains(names,'springboot--->3')}"/>
+	<p th:text="${#sets.size(names)}"/>
+	<p th:text="${#sets.contains(ids,2)}"/>
+	<hr/>
+	<p th:text="${ids[2]}"/>
+	<p th:text="${names[2]}"/>
+	<hr/>
+	<p th:text="${#strings.replace('Hello.SpringBoot.com','.','=')}"/>
+	<p th:text="${#strings.toUpperCase('Hello.SpringBoot.com')}"/>
+	<p th:text="${#strings.trim('  Hello.SpringBoot.com  ')}"/>
+	
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBoot-Error-Show</title>
+</head>
+<body>
+	<p th:text="'访问路径：'+${URL}"></p>
+	<p th:text="'异常信息：'+${Exception.message}"></p>
+</body>
+</html>

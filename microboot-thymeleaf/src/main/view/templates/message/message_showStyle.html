@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBoot模板渲染</title>
+	<script type="text/javascript" th:src="@{/js/main.js}"></script>
+</head>
+<body>
+	<p th:text="'接收信息：'+${msg}"></p>
+	<p th:utext="'接收信息：'+${msg}"></p>
+	<hr/>
+	<h2 th:text="'资源文件信息：'+#{welcome.url}"/>
+	<h2 th:text="'资源文件信息：'+#{welcome.msg('SpringBoot')}"/>
+	<hr/>
+	<h2 th:utext="'接收信息：'+${msg}+',数学计算：'+(23+4)"/>
+	<hr/>
+	<a th:href="@{/show}" th:text="访问"/>
+	<a href="aa.html" th:href="@{/show}">访问</a>
+</body>
+</html>

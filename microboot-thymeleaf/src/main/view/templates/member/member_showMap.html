@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBootMemberShowMap</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>NO.</td>
+			<td>KEY</td>
+			<td>MID</td>
+			<td>NAME</td>
+			<td>AGE</td>
+			<td>BITTHDAY</td>
+			<td>EVEN</td>
+			<td>ODD</td>
+		</tr>
+		<tr th:each="member,memberStat:${memberList}">
+			<td th:text="${memberStat.index +1}"/>
+			<td th:text="${member.key}"/>
+			<td th:text="${member.value.mid}"/>
+			<td th:text="${member.value.name}"/>
+			<td th:text="${member.value.age}"/>
+			<td th:text="${#dates.format(member.value.birthday,'yyyy-MM-dd')}"/>
+			<td th:text="${memberStat.even}"/>
+			<td th:text="${memberStat.odd}"/>
+		</tr>
+	</table>
+	<hr/>
+	<div th:replace="@{commons/footer} :: companyInfo"></div>
+	<hr/>
+	<div th:include="@{commons/footer} :: companyInfo" th:with="itemid=2,subid=3"></div>
+</body>
+</html>

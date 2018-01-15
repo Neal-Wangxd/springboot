@@ -1,0 +1,23 @@
+spring:  #表示该配置直接为Spring容器负责处理
+  messages:  #表示进行资源配置
+    basename: i18n/Messages,i18n/Pages  #资源文件的名称
+  profiles:
+    active: prd
+    
+---
+spring:
+  profiles: dev
+server: 
+  port: 8080
+
+---
+spring:
+  profiles: beta
+server: 
+  port: 9090
+
+---
+spring:
+  profiles: prd
+server: 
+  port: 80

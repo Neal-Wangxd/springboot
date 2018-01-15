@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBoot模板渲染</title>
+</head>
+<body>
+	<p th:utext="'接收路径：'+${url}"></p>
+	<p th:utext="'接收信息：'+${msg}"></p>
+	<p th:utext="'接收路径：'+*{url}"></p>
+	
+	<p th:utext="'sessionMsg = '+${session.sessionMsg}"></p>
+	<p th:utext="'applicationMsg = '+${application.applicationMsg}"></p>
+	
+	<p th:text="${#httpServletRequest.getRemoteAddr()}"></p>
+	<p th:text="${#httpServletRequest.getAttribute('requestMsg')}"></p>
+	<p th:text="${#httpSession.getId()}"></p>
+	<p th:text="${#httpServletRequest.getServletContext().getRealPath('/')}"></p>
+	
+</body>
+</html>

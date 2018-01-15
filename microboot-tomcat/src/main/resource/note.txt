@@ -1,0 +1,27 @@
+
+
+配置Tomcat运行
+
+首先修改项目打包类型为war
+修改pom.xml文件
+<packaging>war</packaging>
+项目最终需要进行打包操作所以还需要设置一个maven的war文件打包插件
+<plugins>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-war-plugin</artifactId>
+		<configuration>
+			<warName>springboot</warName>
+		</configuration>
+	</plugin>
+</plugins>
+
+由于现在的项目打包为war文件之后需要通过tomcat执行，此时注销掉jetty的相关配置
+此时缺少web.xml配置文件（webapps/WEB-INF/web.xml），直接在tomcat目录下拷贝。
+
+若要以tomcat的形式运行，要对springboot的启动类做一个简单的配置处理
+
+进行项目的打包处理
+
+将生成的war文件放置tomcat/webapps目录下进行项目的热部署，
+
