@@ -88,5 +88,6 @@
     <module>microboot-error</module>
     <module>microboot-tomcat</module>
     <module>microboot-thymeleaf</module>
+    <module>microboot-upload</module>
   </modules>
 </project>
