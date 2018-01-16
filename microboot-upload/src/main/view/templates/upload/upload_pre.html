@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBootUploadPre</title>
+</head>
+<body>
+	<form th:action="@{/upload/upload}" method="post" enctype="multipart/form-data">
+		Name : <input type="text" name="name"/><br/>
+		File : <input type="file" name="multipartFile"/><br/>
+		<input type="submit" value="upload"/>
+		<input type="reset" value="Reset"/>
+	</form>
+</body>
+</html>
