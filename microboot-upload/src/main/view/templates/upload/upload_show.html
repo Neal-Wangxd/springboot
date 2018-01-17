@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<link rel="icon" type="image/x-icon" th:href="@{/images/myico_16.ico}"/>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-	<title>SpringBootUploadPre</title>
+	<title>SpringBootUploadShow</title>
 </head>
 <body>
 	<p th:text="${name}" />
 	<p th:text="${fileName}" />
 	<p th:text="${fileType}" />
 	<p th:text="${fileSize}" />
+	<p th:text="${filePath}"/>
 </body>
 </html>
