@@ -1,148 +1,18 @@
+基础文件上传
+
+使用apache fileupload组件 
+MultipartFile 从页面接收文件对象
+form表单添加 enctype = "multipart/form-data"
 
 
-信息显示
+文件上传限制
 
-th:text="'接收消息：'+${msg}"  
-th就是thymeleaf的支持语法，即此时明确显示的是个普通文本信息
-
-
-转义标签：<p th:text="'接收消息：'+${msg}"></p>
-原样显示：<p th:utext="'接收消息：'+${msg}"></p> 
-若从安全角度来看使用th:text 的处理方式显示信息安全，所有的html代码会被过滤掉
-
-th:text 可以获取资源文件的内容
-<h2 th:text="'资源文件信息：'+#{welcome.url}"/>
-<h2 th:text="'资源文件信息：'+#{welcome.msg('SpringBoot')}"/>
-
-th:text还可以编写一些基础的运算
-<h2 th:utext="'接收信息：'+${msg}+',数学计算：'+(23+4)"/>
-
-
-
-路径处理
-
-thymeleaf使用@{}进行一个访问路径的处理
-<script type="text/javascript" th:src="@{/js/main.js}"></script>
-
-如果在使用超链接的时候设置了href和th:href 的话，前者的html元素的默认属性将无效
-<a th:href="@{/show}" th:text="访问"/>
-<a href="aa.html" th:href="@{/show}">访问</a>
-
-
-内置对象
-
-
-在这种模板开发框架里面不提倡使用内置对象，但是还是会有部分开发者依然要使用内置对象进行处理。
-<p th:utext="'接收路径：'+${url}"></p>
-<p th:utext="'接收信息：'+${msg}"></p>
-也可以使用*{属性名称}进行访问<p th:text="'接收路径：'+*{url}"/>
-
-thymeleaf 考虑到了实际的开发情况，因为request传递属性是最为常用的，但是session必须增加属性范围的形式后才能正常使用.
-<p th:utext="'sessionMsg = '+${session.sessionMsg}"></p>
-<p th:utext="'applicationMsg = '+${application.applicationMsg}"></p>
-
-实际上在thymeleaf中也支持JSP内置对象的获取操作,不过一般很少使用	
-<p th:text="${#httpServletRequest.getRemoteAddr()}"></p>
-<p th:text="${#httpServletRequest.getAttribute('requestMsg')}"></p>
-<p th:text="${#httpSession.getId()}"></p>
-<p th:text="${#httpServletRequest.getServletContext().getRealPath('/')}"></p>
-
-
-
-对象输出
-
-在实际开发中经常要在页面显示对象内容处理操作，
-
-<p th:text="'用户编号：' + ${member.mid}"/>
-
-<div th:object="${member}">
-		<p th:text="'用户编号：' + *{mid}"/>
-</div>
-关于属性 ${属性} 与 *{属性}
-$访问的完整信息，而*访问指定对象中的属性内容，如果访问的只是普通的内容两者没有区别
-
-
-逻辑处理操作
-
-thymeleaf中对于逻辑可以使用以下运算符来完成， 
-如： and or  关系比较(>   <   >=   <=   ==   !=)
-				 (gt  lt  ge   le   eq   ne)
-
-不满足条件(不满足年龄大于18)
-th:unless="${member.age gt 18}"
-
-
-th:switch="${member.mid}"
-	th:case="100" 换号100
-	th:case="101" 换号101
-	th:case="*"	  未匹配到
-	
-	
-	
-数据迭代
-
-
-<tr th:each="member,memberStat:${memberList}">
-	<td th:text="${memberStat.index +1}"/>
-	<td th:text="${member.mid}"/>
-	<td th:text="${member.name}"/>
-	<td th:text="${member.age}"/>
-	<td th:text="${#dates.format(member.birthday,'yyyy-MM-dd')}"/>
-</tr>
-
-
-<tr th:each="member,memberStat:${memberList}">
-	<td th:text="${memberStat.index +1}"/>
-	<td th:text="${member.key}"/>
-	<td th:text="${member.value.mid}"/>
-	<td th:text="${member.value.name}"/>
-	<td th:text="${member.value.age}"/>
-	<td th:text="${#dates.format(member.value.birthday,'yyyy-MM-dd')}"/>
-	<td th:text="${memberStat.even}"/>
-	<td th:text="${memberStat.odd}"/>
-</tr>
-
-
-
-
-包含处理
-
-
-th:replace 是使用标签进行替换，原始的宿主标签还在，但是包含的标签不在
-th:include 是进行包含，原始的宿主标签消失，而保留包含的标签
-
-<div th:replace="@{commons/footer} :: companyInfo"></div>
-<div th:include="@{commons/footer} :: companyInfo"></div>
-
-
-参数的传递使用th:with完成
-<div th:include="@{commons/footer} :: companyInfo" th:with="itemid=2,subid=3"></div>
-
-
-数据处理
-
-在thymeleaf中提供有相应的集合处理方法：如List的集合的get()方法，Set集合的contains()方法
-Map集合的containsKey()判断某个key是否存在，以及用get()根据key获取value
-
-
-
-@RequestMapping(value="/member/memberSet",method = RequestMethod.GET)
-	public String memberSet(Model model){
-		Set<String> names = new HashSet<String>();
-		Set<Integer> ids = new HashSet<Integer>();
-		...
-	}
-<p th:text="${#sets.contains(names,'springboot--->3')}"/>
-<p th:text="${#sets.size(names)}"/>
-<p th:text="${#sets.contains(ids,2)}"/>
-若返回的不是set集合，是list集合，只需将#sets换为#lists
-
-
-若进行了集合类型的修改实际上页面保持不变，依然可以根据索引获取数据，而不关心是set集合还是list集合
-<p th:text="${ids[2]}"/>
-<p th:text="${names[2]}"/>
-
-thymeleaf对字符串处理的支持
-<p th:text="${#strings.replace('Hello.SpringBoot.com','.','=')}"/>
-<p th:text="${#strings.toUpperCase('Hello.SpringBoot.com')}"/>
-<p th:text="${#strings.trim('  Hello.SpringBoot.com  ')}"/>
+进行application.yml配置文件的修改
+spring:
+  http:
+    multipart:
+      enabled: true #可以启用http上传
+      max-file-size: 10MB #单个文件大小限制
+      max-request-size: 20MB #总共上传文件大小
+      file-size-threshold: 512KB #当文件上传达到指定配置量时，文件写入磁盘
+      location: /E:/testUpload
