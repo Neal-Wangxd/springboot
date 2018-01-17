@@ -89,5 +89,6 @@
     <module>microboot-tomcat</module>
     <module>microboot-thymeleaf</module>
     <module>microboot-upload</module>
+    <module>microboot-interceptor</module>
   </modules>
 </project>
