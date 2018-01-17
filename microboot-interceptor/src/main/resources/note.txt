@@ -1,0 +1,22 @@
+基础拦截器
+
+拦截器是一种aop操作实现，在aop之中用户不需要去关注拦截器的存在，
+先编写一个拦截器实现类MyInterceptor，实现HandlerInterceptor接口，实现方法
+再写一个拦截器的配置类MyWebApplicationConfig 继承WebMvcConfigurerAdapter
+重写addInterceptors方法，
+
+
+AOP拦截器
+
+在spring里提供有一种AOP拦截器配置，不过大部分的aop拦截器都是围绕业务层进行拦截处理
+先建立一个普通的业务操作接口MemberService和他的子类MemberServiceImpl
+然后在业务层的操作完成之后随意去修改控制层，让控制层进行业务调用（memberGet）
+
+现在业务层只是一个纯粹的调用而已，但是现在希望对调用的过程进行拦截处理，所以要想实现这样的处理，就需要引入依赖包
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+编写一个aop拦截控制程序类ServiceAspect
+对于web拦截可以使用拦截器，而对于业务层的拦截可以使用aspect表达式结合aop的拦截机制实现
+
