@@ -1,2 +1,11 @@
 server:
   port: 80
+  
+spring:
+  http:
+    multipart:
+      enabled: true #可以启用http上传
+      max-file-size: 10MB #单个文件大小限制
+      max-request-size: 20MB #总共上传文件大小
+      file-size-threshold: 512KB #当文件上传达到指定配置量时，文件写入磁盘
+      location: E:/mytemp/
