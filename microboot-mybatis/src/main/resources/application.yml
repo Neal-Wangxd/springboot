@@ -1,0 +1,23 @@
+server:
+  port: 80
+  context-path: /mybatis
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    #配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.jdbc.Driver        #配置mysql的驱动程序类
+    url: jdbc:mysql://127.0.0.1:3306/springboot_db?useSSL=false        #数据库连接地址
+    username: root                                  #用户名
+    password: password                              #密码
+    filters: stat,wall,log4j
+    dbcp2:                                          #数据库连接池的配置
+      min-idle: 10                                  #数据库连接池最小维持连接数
+      initial-size: 10                              #初始化提供的连接数
+      max-total: 10                                 #最大连接数
+      max-wait-millis: 200                          #等待连接获取的最大超时时间
+      
+      
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml   #mybatis 配置文件路径
+  type-aliases-package: com.microboot.bean             #定义所有操作类的别名所在包
+  mapper-locations:
+  - classpath:mybatis/mapper/*.xml                  #所有的mapper映射文件
