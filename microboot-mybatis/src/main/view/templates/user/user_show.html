@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="images/myico_16.ico"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SpringBootMemberShowList</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>NO.</td>
+			<td>AGE</td>
+			<td>NAME</td>
+			<td>SALARY</td>
+			<td>HIGHT</td>
+			<td>BITTHDAY</td>
+		</tr>
+		<tr th:each="user,userStat:${userList}">
+			<td th:text="${userStat.index +1}"/>
+			<td th:text="${user.age}"/>
+			<td th:text="${user.username}"/>
+			<td th:text="${user.salary}"/>
+			<td th:text="${user.hight}"/>
+			<td th:text="${#dates.format(user.birthday,'yyyy-MM-dd')}"/>
+		</tr>
+	</table>
+</body>
+</html>
