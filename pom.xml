@@ -114,5 +114,6 @@
 	    <module>microboot-interceptor</module>
 	    <module>microboot-mybatis</module>
     <module>microboot-task</module>
+    <module>microboot-redis</module>
   </modules>
 </project>
