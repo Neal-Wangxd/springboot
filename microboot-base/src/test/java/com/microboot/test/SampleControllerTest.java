@@ -29,7 +29,7 @@ public class SampleControllerTest {
 	
 	@Test
 	public void TestHome(){
-		//TestCase.assertEquals(this.sampleController.home(), "Hello World!  Hello SpringBoot");
+		TestCase.assertEquals(this.sampleController.home(), "Hello World!  Hello SpringBoot");
 	}
 
 }

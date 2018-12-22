@@ -113,10 +113,10 @@
 	    <module>microboot-upload</module>
 	    <module>microboot-interceptor</module>
 	    <module>microboot-mybatis</module>
-    <module>microboot-task</module>
-    <module>microboot-redis</module>
-    <module>microboot-restful-api</module>
-    <module>microboot-restful-provider</module>
-    <module>microboot-restful-consumer</module>
+	    <module>microboot-task</module>
+	    <module>microboot-redis</module>
+	    <module>microboot-restful-api</module>
+	    <module>microboot-restful-provider</module>
+	    <module>microboot-restful-consumer</module>
   </modules>
 </project>

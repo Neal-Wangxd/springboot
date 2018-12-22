@@ -27,7 +27,7 @@ public class MemberConsumerController extends AbstractBaseController {
 	@Resource
 	private RestTemplate restTemplate;
 	
-	@RequestMapping(value="/get")
+	@RequestMapping(value="/get",method=RequestMethod.GET)
 	public String getMember(long mid,Model model){
 		Member member = this.restTemplate.getForObject(
 				"http://localhost:8088/restful-provider/member/get/"+ mid, Member.class);
@@ -39,15 +39,15 @@ public class MemberConsumerController extends AbstractBaseController {
 	}
 	
 	@RequestMapping(value = "/add")
-	public String addMember(Model model){
+	public String addMember(Model model){ 
 		return "member/member_add";
 	}
 	
-	@RequestMapping(value="/addDo",method=RequestMethod.GET)
+	@RequestMapping(value="/addDo",method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public Object addMemberDo(Member member){
-		Boolean flag = this.restTemplate.getForObject(
-				"http://localhost:8088/restful-provider/member/add"+ member, boolean.class);
+		Boolean flag = this.restTemplate.postForObject(
+				"http://localhost:8088/restful-provider/member/add" , member, boolean.class);
 		return flag ;
 	}
 }

@@ -4,7 +4,7 @@ server:
   
 spring:
   redis:
-    host: 192.168.44.128
+    host: 192.168.174.128
     port: 6379
     timeout: 1000
     database: 0
@@ -14,7 +14,7 @@ spring:
       min-idle: 2
       max-wait: 200
   redis-two:
-     host: 192.168.44.128
+     host: 192.168.174.128
      port: 6380
      timeout: 1000
      database: 0

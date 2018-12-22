@@ -20,7 +20,7 @@ import com.microboot.bean.Member;
 @RestController
 public class MemberController {
 	
-	@RequestMapping(value="/member/add",method=RequestMethod.POST)
+	@RequestMapping(value="/member/add",method={RequestMethod.POST,RequestMethod.GET} )
 	public Object add(@RequestBody Member member){//表示当前的配置可以直接将参数变为实体对象
 		System.out.println("【*****接收对象*****MemberController.add()】"+member);
 		return true;
@@ -31,7 +31,6 @@ public class MemberController {
 		Member member = new Member();
 		member.setMid(mid);
 		member.setName("springboot-restful-" + mid);
-		member.setBirthday(new Date());
 		member.setSalary(15899.00);
 		member.setAge(25);
 		System.out.println("【^^^^^获取对象^^^^^^MemberController.get()】"+member);

@@ -43,6 +43,7 @@ public class MessageController extends AbstractBaseController{
 		model.addAttribute("mid", mid);//
 		return "message/message_show";//此处只返回路径，该路径没有设置后缀，后缀默认是*.html
 	}
+	//http://localhost/springboot/show?mid=%E6%92%92%E5%9C%B0%E6%96%B9
 
 }
  
