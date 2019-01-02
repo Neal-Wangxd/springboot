@@ -17,17 +17,19 @@ public class Member implements Serializable {
 	private String name;
 	private Integer age;
 	private Double salary;
+	private Date birthday;
 	
 	
 	public Member() {
 		super();
 	}
-	public Member(Long mid, String name, Integer age, Double salary) {
+	public Member(Long mid, String name, Integer age, Double salary,Date birthday) {
 		super();
 		this.mid = mid;
 		this.name = name;
 		this.age = age;
 		this.salary = salary;
+		this.birthday = birthday;
 	}
 	public Long getMid() {
 		return mid;
@@ -53,10 +55,18 @@ public class Member implements Serializable {
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 	@Override
 	public String toString() {
-		return "Member [mid=" + mid + ", name=" + name + ", age=" + age + ", salary=" + salary +  "]";
+		return "Member [mid=" + mid + ", name=" + name + ", age=" + age + ", salary=" + salary + ", birthday="
+				+ birthday + "]";
 	}
+	
 	
 }
  
