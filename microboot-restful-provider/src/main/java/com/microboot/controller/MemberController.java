@@ -33,6 +33,7 @@ public class MemberController {
 		member.setName("springboot-restful-" + mid);
 		member.setSalary(15899.00);
 		member.setAge(25);
+		member.setBirthday(new Date());
 		System.out.println("【^^^^^获取对象^^^^^^MemberController.get()】"+member);
 		return member;
 	}
