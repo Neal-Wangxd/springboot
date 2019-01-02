@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.microboot.bean.Member;
@@ -21,7 +22,8 @@ import com.microboot.bean.Member;
 * 创建时间：2018年1月23日 下午3:25:54 
 * 类说明 
 */
-@Controller
+@Controller  
+
 public class MemberConsumerController extends AbstractBaseController {
 
 	@Resource
@@ -34,8 +36,19 @@ public class MemberConsumerController extends AbstractBaseController {
 		List<Member> members = new ArrayList<>();
 		members.add(member);
 		model.addAttribute("memberList",members);
+		for (Member member2 : members) {
+			System.out.println(member2+"---------------");
+		}
 		
 		return "member/member_show";
+	}
+	
+	@ResponseBody 
+	@RequestMapping(value="/getJson")
+	public Member getMemberForJson(long mid){
+		Member member = this.restTemplate.getForObject(
+				"http://localhost:8088/restful-provider/member/get/"+ mid, Member.class);
+		return member;
 	}
 	
 	@RequestMapping(value = "/add")
